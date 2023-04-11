@@ -13,5 +13,5 @@ export const routes: Routes = [
   {
     path: 'income',
     loadComponent: () => import('./income/income.page').then( m => m.IncomePage)
-  },
+  }
 ];
