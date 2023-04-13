@@ -17,4 +17,8 @@ export class IncomeListComponent  implements OnInit {
 
   ngOnInit() {
   }
+
+  open() {
+    console.log('teste da list')
+  }
 }
