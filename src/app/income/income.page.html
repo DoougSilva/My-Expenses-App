@@ -1,18 +1,5 @@
 <ion-icon name="arrow-back" (click)="onHome()" size="large"></ion-icon>
-<div style="">
-   <h1 style="margin-left: 10px;">Total de rendas:</h1>
-<div style="display: flex; justify-content: center;">
-    <div style="width:95%;
-    height: 80px;
-    background-color: rgba(66, 66, 250, 0.877);
-    border-radius: 10px; font-size: large; justify-content: center; display: flex;">
-        <h1>R$ 2.000,00</h1>   
-    </div>
-</div> 
-</div>
-
-
+<app-display [entity]="entity" [value]="totalValue"></app-display>
 <div class="income-list">
-    <app-income-list [incomes]="incomeList"></app-income-list>
+    <app-list [list]="incomeList"></app-list>
 </div>
-

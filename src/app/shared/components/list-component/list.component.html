@@ -10,10 +10,10 @@
 
   <ion-card-content>
     <ion-list>
-      <ion-item *ngFor="let income of incomes">
+      <ion-item *ngFor="let entity of list">
         <ion-label>
-          <h2>{{income.id}}</h2>
-          <p>{{income.name}}</p>
+          <h2>{{entity?.name}}</h2>
+          <p>{{entity?.value}}</p>
         </ion-label>
           <ion-icon name="pencil" slot="end"></ion-icon>
           <ion-icon name="trash" slot="end"></ion-icon>
