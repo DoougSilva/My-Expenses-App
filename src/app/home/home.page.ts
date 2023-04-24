@@ -16,4 +16,8 @@ export class HomePage {
   onIncome() {
     this.router.navigate(['income']);
   }
+
+  onExpensesGroup() {
+    this.router.navigate(['expenses-group']);
+  }
 }

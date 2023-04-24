@@ -13,5 +13,13 @@ export const routes: Routes = [
   {
     path: 'income',
     loadComponent: () => import('./income/income.page').then( m => m.IncomePage)
+  },
+  {
+    path: 'expenses',
+    loadComponent: () => import('./expenses-group/expenses/expenses.page').then( m => m.ExpensesPage)
+  },
+  {
+    path: 'expenses-group',
+    loadComponent: () => import('./expenses-group/expenses-group.page').then( m => m.ExpensesGroupPage)
   }
 ];

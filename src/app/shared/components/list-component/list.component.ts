@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { Iincome } from 'src/app/income/model/income.interface';
 
 @Component({
   selector: 'app-list',
@@ -11,13 +12,15 @@ import { CommonModule } from '@angular/common';
 })
 export class ListComponent  implements OnInit {
   @Input() list: any[] = [];
+  @Input() title: string = '';
+  @Output() add = new EventEmitter(false);
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  open() {
-    console.log('teste da list')
+  onOpen(event: any) {
+    this.add.emit(event);
   }
 }

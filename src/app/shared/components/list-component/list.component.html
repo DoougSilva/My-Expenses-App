@@ -1,7 +1,7 @@
 <ion-card>
   <ion-card-header>
     <ion-card-title style="display: flex;justify-content: space-between;">
-      Rendas
+      {{ title }}
       <ion-button>
         <ion-icon name="add"></ion-icon>
       </ion-button>
@@ -11,12 +11,16 @@
   <ion-card-content>
     <ion-list>
       <ion-item *ngFor="let entity of list">
-        <ion-label>
+        <ion-label (click)="onOpen(entity)">
           <h2>{{entity?.name}}</h2>
           <p>{{entity?.value}}</p>
         </ion-label>
-          <ion-icon name="pencil" slot="end"></ion-icon>
-          <ion-icon name="trash" slot="end"></ion-icon>
+          <div class="edit">
+            <ion-icon class="icon" name="pencil" slot="end"></ion-icon>
+          </div>
+          <div class="edit">
+            <ion-icon class="icon" name="trash" slot="end"></ion-icon>
+          </div>
       </ion-item>
     </ion-list>
   </ion-card-content>
