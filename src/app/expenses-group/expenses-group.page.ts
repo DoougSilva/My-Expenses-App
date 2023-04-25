@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { Iincome } from '../income/model/income.interface';
 import { ListComponent } from '../shared/components/list-component/list.component';
 import { DisplayComponent } from '../shared/components/display-component/display.component';
+import { ModalComponent } from '../shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-expenses-group',
   templateUrl: './expenses-group.page.html',
   styleUrls: ['./expenses-group.page.scss'],
   standalone: true,
-  imports: [IonicModule, ListComponent, DisplayComponent]
+  imports: [IonicModule, ListComponent, DisplayComponent, ModalComponent]
 })
 export class ExpensesGroupPage implements OnInit {
 

@@ -4,13 +4,14 @@ import { IonicModule } from '@ionic/angular';
 import { Iincome } from './model/income.interface';
 import { ListComponent } from '../shared/components/list-component/list.component';
 import { DisplayComponent } from '../shared/components/display-component/display.component';
+import { ModalComponent } from '../shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-income',
   templateUrl: './income.page.html',
   styleUrls: ['./income.page.scss'],
   standalone: true,
-  imports: [IonicModule, ListComponent, DisplayComponent]
+  imports: [IonicModule, ListComponent, DisplayComponent, ModalComponent]
 })
 export class IncomePage implements OnInit {
 
