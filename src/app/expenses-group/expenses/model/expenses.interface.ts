@@ -1,5 +1,7 @@
 import { Entity } from "src/app/shared/model/entity.inteface";
 
-export interface Iincome extends Entity{
+export interface IExpenses extends Entity{
+    expiry: Date;
     value: number;
+    buy: boolean;
   }

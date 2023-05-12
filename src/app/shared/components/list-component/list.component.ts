@@ -14,13 +14,18 @@ export class ListComponent  implements OnInit {
   @Input() list: any[] = [];
   @Input() title: string = '';
   @Output() add = new EventEmitter(false);
+  @Output() open = new EventEmitter(false);
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onAdd() {
+    this.add.emit(true);
+  }
+
   onOpen(event: any) {
-    this.add.emit(event);
+    this.open.emit(event);
   }
 }

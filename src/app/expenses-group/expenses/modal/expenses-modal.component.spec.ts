@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ModalComponent } from './modal.component';
+import { ExpensesModalComponent } from './expenses-modal.component';
 
-describe('ModalComponent', () => {
-  let component: ModalComponent;
-  let fixture: ComponentFixture<ModalComponent>;
+describe('ExpensesModalComponent', () => {
+  let component: ExpensesModalComponent;
+  let fixture: ComponentFixture<ExpensesModalComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalComponent ],
+      declarations: [ ExpensesModalComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ModalComponent);
+    fixture = TestBed.createComponent(ExpensesModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

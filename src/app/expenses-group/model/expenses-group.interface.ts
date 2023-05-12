@@ -1,5 +1,4 @@
 import { Entity } from "src/app/shared/model/entity.inteface";
 
-export interface Iincome extends Entity{
-    value: number;
+export interface IExpensesGroup extends Entity{
   }

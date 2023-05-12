@@ -3,10 +3,8 @@
 <app-display [entity]="entity" [value]="totalValue"></app-display>
 
 <div class="income-list">
-    <app-list 
+    <app-list
     [list]="incomeList"
     [title]="entity"
+    (add)="onAdd()"
     ></app-list>
-</div>
-
-<app-modal></app-modal>

@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 import { Iincome } from '../income/model/income.interface';
 import { ListComponent } from '../shared/components/list-component/list.component';
 import { DisplayComponent } from '../shared/components/display-component/display.component';
-import { ModalComponent } from '../shared/components/modal/modal.component';
+import { ExpensesGroupModalService } from './modal/service/expenses-group-modal.service';
 
 @Component({
   selector: 'app-expenses-group',
   templateUrl: './expenses-group.page.html',
   styleUrls: ['./expenses-group.page.scss'],
   standalone: true,
-  imports: [IonicModule, ListComponent, DisplayComponent, ModalComponent]
+  imports: [IonicModule, ListComponent, DisplayComponent]
 })
 export class ExpensesGroupPage implements OnInit {
 
@@ -21,7 +21,7 @@ export class ExpensesGroupPage implements OnInit {
   totalValue: string = 'R$ 2.000,00'
 
   constructor(
-    private router: Router) { }
+    private router: Router, private modalService: ExpensesGroupModalService) { }
 
   ngOnInit() {
     this.incomeList = [{id: '998dfs8', name: 'R$1.500,00'}, {id: 'Poupança', name: 'R$500,00'}] as Iincome[];
@@ -33,5 +33,9 @@ export class ExpensesGroupPage implements OnInit {
 
   onOpen(event: Iincome) {
     this.router.navigate(['expenses']);
+  }
+
+  onAdd() {
+    this.modalService.openIonModal();
   }
 }
