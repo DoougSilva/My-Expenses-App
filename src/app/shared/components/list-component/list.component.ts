@@ -15,6 +15,7 @@ export class ListComponent  implements OnInit {
   @Input() title: string = '';
   @Output() add = new EventEmitter(false);
   @Output() open = new EventEmitter(false);
+  @Output() edit = new EventEmitter(false);
 
   constructor() { }
 
@@ -23,6 +24,10 @@ export class ListComponent  implements OnInit {
 
   onAdd() {
     this.add.emit(true);
+  }
+
+  onEdit(event: any) {
+    this.edit.emit(event);
   }
 
   onOpen(event: any) {

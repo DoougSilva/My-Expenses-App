@@ -35,6 +35,10 @@ export class ExpensesGroupPage implements OnInit {
     this.router.navigate(['expenses']);
   }
 
+  onEdit(entity: Iincome) {
+    this.modalService.editModal(entity);
+  }
+
   onAdd() {
     this.modalService.openIonModal();
   }

@@ -13,12 +13,11 @@ import { ExpensesModalService } from './service/expenses-modal.service';
 })
 export class ExpensesModalComponent {
 
-  form: FormGroup;
-  fb: FormBuilder = new FormBuilder();
+  @Input() form: FormGroup;
 
   constructor(private modalController: ModalController,
               private service: ExpensesModalService) {
-                this.form = service.createForm(this.fb);
+                this.form = service.createForm();
    }
 
   async closeModal() {

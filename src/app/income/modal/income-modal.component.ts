@@ -13,13 +13,12 @@ import { IncomeModalService } from './service/income-modal.service';
 })
 export class IncomeModalComponent {
 
-  form: FormGroup;
-  fb: FormBuilder = new FormBuilder();
+  @Input() form: FormGroup;
 
   constructor(private modalController: ModalController,
               private service: IncomeModalService) {
-                this.form = service.createForm(this.fb);
-              }
+                this.form = service.createForm();
+              }     
 
   async closeModal() {
     const close: string = "Modal Removed";

@@ -7,6 +7,7 @@ import { Iincome } from '../../income/model/income.interface';
 import { ListComponent } from '../../shared/components/list-component/list.component';
 import { DisplayComponent } from '../../shared/components/display-component/display.component';
 import { ExpensesModalService } from './modal/service/expenses-modal.service';
+import { IExpenses } from './model/expenses.interface';
 
 @Component({
   selector: 'app-expenses',
@@ -33,5 +34,9 @@ export class ExpensesPage implements OnInit {
 
   onAdd() {
     this.modalService.openIonModal();
+  }
+
+  onEdit(entity: IExpenses) {
+    this.modalService.editModal(entity);
   }
 }

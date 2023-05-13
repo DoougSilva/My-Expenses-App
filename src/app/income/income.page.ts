@@ -29,6 +29,10 @@ export class IncomePage implements OnInit {
     this.router.navigate(['home']);
   }
 
+  onEdit(entity: Iincome) {
+    this.modalService.editModal(entity);
+  }
+
   onAdd() {
     this.modalService.openIonModal();
   }
