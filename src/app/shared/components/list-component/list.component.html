@@ -28,7 +28,7 @@
             <ion-icon class="icon" name="pencil" slot="end"></ion-icon>
           </div>
           <div class="edit">
-            <ion-icon class="icon" name="trash" slot="end"></ion-icon>
+            <ion-icon (click)="confirmDelete(entity)" class="icon" name="trash" slot="end"></ion-icon>
           </div>
       </div>
     </ion-list>

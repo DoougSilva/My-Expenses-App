@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Iincome } from 'src/app/income/model/income.interface';
 
@@ -16,8 +16,27 @@ export class ListComponent  implements OnInit {
   @Output() add = new EventEmitter(false);
   @Output() open = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
+  @Output() delete = new EventEmitter(false);
 
-  constructor() { }
+  entityToDelete: any;
+
+  alertButtons = [
+    {
+      text: 'Deletar',
+      cssClass: 'alert-button-confirm',
+      handler: () => {
+        this.onDelete(this.entityToDelete);
+      }
+    },
+    {
+      text: 'Cancelar',
+      handler: () => {
+        this.entityToDelete = null;
+      }
+    }
+  ];
+
+  constructor(public alertController: AlertController) { }
 
   ngOnInit() {
   }
@@ -30,7 +49,23 @@ export class ListComponent  implements OnInit {
     this.edit.emit(event);
   }
 
+  onDelete(event: any) {
+    this.delete.emit(event);
+  }
+
   onOpen(event: any) {
     this.open.emit(event);
+  }
+
+  async confirmDelete(entity: any) {
+    this.entityToDelete = entity;
+    const alert = await this.alertController.create({
+      header: 'Alert',
+      subHeader: 'Important message',
+      message: 'This is an alert!',
+      buttons: this.alertButtons
+    });
+
+    await alert.present();
   }
 }
