@@ -60,9 +60,8 @@ export class ListComponent  implements OnInit {
   async confirmDelete(entity: any) {
     this.entityToDelete = entity;
     const alert = await this.alertController.create({
-      header: 'Alert',
-      subHeader: 'Important message',
-      message: 'This is an alert!',
+      header: 'Confirmar remoção de:',
+      message: `${entity?.name}`, 
       buttons: this.alertButtons
     });
 

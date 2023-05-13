@@ -6,7 +6,7 @@
     <ion-title>Ionic Modal Popup Example</ion-title>
   </ion-toolbar>
 
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="save()">
     <ion-item>
       <ion-label position="floating">Nome</ion-label>
       <ion-input formControlName="name" type="text" required></ion-input>

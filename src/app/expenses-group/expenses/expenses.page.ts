@@ -8,6 +8,7 @@ import { ListComponent } from '../../shared/components/list-component/list.compo
 import { DisplayComponent } from '../../shared/components/display-component/display.component';
 import { ExpensesModalService } from './modal/service/expenses-modal.service';
 import { IExpenses } from './model/expenses.interface';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-expenses',
@@ -22,7 +23,7 @@ export class ExpensesPage implements OnInit {
   entity: string = 'Despesas';
   totalValue: string = 'R$ 2.000,00'
 
-  constructor(private router: Router, private modalService: ExpensesModalService) { }
+  constructor(private router: Router, private modalService: ExpensesModalService, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.incomeList = [{id: '15df1sd5fs5d', name: 'R$1.500,00'}, {id: 'Poupança', name: 'R$500,00'}] as Iincome[];
@@ -38,5 +39,10 @@ export class ExpensesPage implements OnInit {
 
   onEdit(entity: IExpenses) {
     this.modalService.editModal(entity);
+  }
+
+  onDelete(entity: Iincome) {
+    //service responsavel pelo crud executando o delete
+    this.notificationService.success('Renda deletada com sucesso!');
   }
 }

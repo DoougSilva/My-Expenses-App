@@ -5,6 +5,7 @@ import { Iincome } from './model/income.interface';
 import { ListComponent } from '../shared/components/list-component/list.component';
 import { DisplayComponent } from '../shared/components/display-component/display.component';
 import { IncomeModalService } from './modal/service/income-modal.service';
+import { NotificationService } from '../shared/services/notification.service';
 
 @Component({
   selector: 'app-income',
@@ -19,7 +20,7 @@ export class IncomePage implements OnInit {
   entity: string = 'Rendas';
   totalValue: string = 'R$ 2.000,00'
 
-  constructor(private router: Router, private modalService: IncomeModalService) { }
+  constructor(private router: Router, private modalService: IncomeModalService, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.incomeList = [{id: 'Salario', name: 'R$1.500,00'}, {id: 'Poupança', name: 'R$500,00'}] as Iincome[];
@@ -35,5 +36,10 @@ export class IncomePage implements OnInit {
 
   onAdd() {
     this.modalService.openIonModal();
+  }
+
+  onDelete(entity: Iincome) {
+    //service responsavel pelo crud executando o delete
+    this.notificationService.success('Renda deletada com sucesso!');
   }
 }
