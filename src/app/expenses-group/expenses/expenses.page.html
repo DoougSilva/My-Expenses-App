@@ -2,11 +2,10 @@
 
 <app-display [entity]="entity" [value]="totalValue"></app-display>
 
-<div class="income-list">
-    <app-list
-    [list]="incomeList"
+<app-list
+    [list]="expensesList"
     [title]="entity"
     (add)="onAdd()"
     (edit)="onEdit($event)"
     (delete)="onDelete($event)"
-    ></app-list>
+></app-list>

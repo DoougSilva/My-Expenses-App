@@ -31,7 +31,31 @@
     color: rgb(247, 241, 241);
 }
   
-  button.alert-button.alert-button-confirm {
+button.alert-button.alert-button-confirm {
     background-color: var(--ion-color-danger);
     color: var(--ion-color-danger-contrast);
-  }
+}
+ion-card-header{
+  background-color: rgb(82, 82, 82);
+  border: none;
+}
+
+ion-card-title{
+  display: flex;
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+}
+
+ion-card-content{
+  background-color: rgb(82, 82, 82);
+  border: none;
+}
+
+.list-items{
+  background-color: rgb(82, 82, 82);
+  border: none;
+}
+
+.toolbar-content{
+  background-color: rgb(82, 82, 82);
+}

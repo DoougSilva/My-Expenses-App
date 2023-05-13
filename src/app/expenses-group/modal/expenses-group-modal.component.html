@@ -3,9 +3,11 @@
     <ion-button (click)="closeModal()">
       <ion-icon name="close-outline" ></ion-icon>
     </ion-button>
-    <ion-title>Ionic Modal Popup Example</ion-title>
+    <ion-title>Grupo de <br>despesas</ion-title>
   </ion-toolbar>
+</ion-header>
 
+<ion-content>
   <form [formGroup]="form" (ngSubmit)="save()">
     <ion-item>
       <ion-label position="floating">Nome</ion-label>
@@ -26,3 +28,4 @@
       </ion-col>
     </ion-row>
   </form>
+</ion-content>

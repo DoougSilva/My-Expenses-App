@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Iincome } from '../income/model/income.interface';
 import { ListComponent } from '../shared/components/list-component/list.component';
 import { DisplayComponent } from '../shared/components/display-component/display.component';
 import { ExpensesGroupModalService } from './modal/service/expenses-group-modal.service';
 import { NotificationService } from '../shared/services/notification.service';
+import { IExpenses } from './expenses/model/expenses.interface';
+import { IExpensesGroup } from './model/expenses-group.interface';
 
 @Component({
   selector: 'app-expenses-group',
@@ -16,7 +17,7 @@ import { NotificationService } from '../shared/services/notification.service';
 })
 export class ExpensesGroupPage implements OnInit {
 
-  incomeList: Iincome[] = [];
+  expensesGroupList: IExpensesGroup[] = [];
   entity: string = 'Despesas';
   title: string = 'Grupo de despesas'
   totalValue: string = 'R$ 2.000,00'
@@ -25,22 +26,22 @@ export class ExpensesGroupPage implements OnInit {
     private router: Router, private modalService: ExpensesGroupModalService, private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.incomeList = [{id: '998dfs8', name: 'R$1.500,00'}, {id: 'Poupança', name: 'R$500,00'}] as Iincome[];
+    this.expensesGroupList = [{id: '998dfs8', name: 'R$1.500,00'}, {id: 'Poupança', name: 'R$500,00'}] as IExpensesGroup[];
   }
 
   onHome() {
     this.router.navigate(['home']);
   }
 
-  onOpen(event: Iincome) {
+  onOpen(event: IExpenses) {
     this.router.navigate(['expenses']);
   }
 
-  onEdit(entity: Iincome) {
+  onEdit(entity: IExpensesGroup) {
     this.modalService.editModal(entity);
   }
 
-  onDelete(entity: Iincome) {
+  onDelete(entity: IExpensesGroup) {
     //service responsavel pelo crud executando o delete
     this.notificationService.success('Renda deletada com sucesso!');
   }

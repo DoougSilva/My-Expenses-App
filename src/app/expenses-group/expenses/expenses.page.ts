@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Iincome } from '../../income/model/income.interface';
 import { ListComponent } from '../../shared/components/list-component/list.component';
 import { DisplayComponent } from '../../shared/components/display-component/display.component';
 import { ExpensesModalService } from './modal/service/expenses-modal.service';
@@ -19,14 +16,14 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 })
 export class ExpensesPage implements OnInit {
 
-  incomeList: Iincome[] = [];
+  expensesList: IExpenses[] = [];
   entity: string = 'Despesas';
   totalValue: string = 'R$ 2.000,00'
 
   constructor(private router: Router, private modalService: ExpensesModalService, private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.incomeList = [{id: '15df1sd5fs5d', name: 'R$1.500,00'}, {id: 'Poupança', name: 'R$500,00'}] as Iincome[];
+    this.expensesList = [{id: '15df1sd5fs5d', name: 'R$1.500,00'}, {id: 'Poupança', name: 'R$500,00'}] as IExpenses[];
   }
 
   onGroup() {
@@ -41,7 +38,7 @@ export class ExpensesPage implements OnInit {
     this.modalService.editModal(entity);
   }
 
-  onDelete(entity: Iincome) {
+  onDelete(entity: IExpenses) {
     //service responsavel pelo crud executando o delete
     this.notificationService.success('Renda deletada com sucesso!');
   }

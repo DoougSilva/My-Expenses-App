@@ -1,6 +1,6 @@
 <ion-card>
   <ion-card-header>
-    <ion-card-title style="display: flex;justify-content: space-between;">
+    <ion-card-title>
       {{ title }}
       <ion-button (click)="onAdd()">
         <ion-icon name="add"></ion-icon>
@@ -10,7 +10,7 @@
 
   <ion-card-content>
     <ion-list>
-      <div style="display: flex;" *ngFor="let entity of list">
+      <div class="list-items" style="display: flex;" *ngFor="let entity of list">
       <div>
          <div (click)="onOpen(entity)" style="width: 135px;
          height: 60px;
