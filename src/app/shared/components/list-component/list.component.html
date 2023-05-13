@@ -10,18 +10,27 @@
 
   <ion-card-content>
     <ion-list>
-      <ion-item *ngFor="let entity of list">
-        <ion-label (click)="onOpen(entity)">
+      <div style="display: flex;" *ngFor="let entity of list">
+      <div>
+         <div (click)="onOpen(entity)" style="width: 135px;
+         height: 60px;
+         background-color: blue;
+         border-radius: 10px; font-size: large; justify-content: center; display: flex; margin-top: 5px; padding: 15px;">
+
+         <ion-label>
           <h2>{{entity?.name}}</h2>
           <p>{{entity?.value}}</p>
         </ion-label>
-          <div class="edit">
+
+         </div>
+      </div> 
+         <div class="edit">
             <ion-icon class="icon" name="pencil" slot="end"></ion-icon>
           </div>
           <div class="edit">
             <ion-icon class="icon" name="trash" slot="end"></ion-icon>
           </div>
-      </ion-item>
+      </div>
     </ion-list>
   </ion-card-content>
 </ion-card>
