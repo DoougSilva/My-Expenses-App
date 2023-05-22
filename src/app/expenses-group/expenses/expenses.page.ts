@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ListComponent } from '../../shared/components/list-component/list.component';
 import { DisplayComponent } from '../../shared/components/display-component/display.component';
 import { ExpensesModalService } from './modal/service/expenses-modal.service';
 import { IExpenses } from './model/expenses.interface';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { ExpensesService } from './service/expenses.service';
+import { DatabaseService } from 'src/app/database/database.service';
+import { SQLite } from '@ionic-native/sqlite/ngx'
 
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.page.html',
   styleUrls: ['./expenses.page.scss'],
   standalone: true,
-  imports: [IonicModule, ListComponent, DisplayComponent]
+  imports: [IonicModule, ListComponent, DisplayComponent],
+  providers: [ExpensesService, DatabaseService, SQLite]
 })
 export class ExpensesPage implements OnInit {
 
@@ -20,11 +24,20 @@ export class ExpensesPage implements OnInit {
   entity: string = 'Despesas';
   totalValue: string = 'R$ 2.000,00'
 
-  constructor(private router: Router, private modalService: ExpensesModalService, private notificationService: NotificationService) { }
+  constructor(private router: Router, private route: ActivatedRoute , private modalService: ExpensesModalService, private notificationService: NotificationService, private service: ExpensesService) { }
 
   ngOnInit() {
-    this.expensesList = [{id: '15df1sd5fs5d', name: 'R$1.500,00'}, {id: 'Poupança', name: 'R$500,00'}] as IExpenses[];
+    this.loadIncomes()
   }
+
+  loadIncomes() {
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      this.service.getAll(id).then((items: IExpenses[]) => {
+      this.expensesList = items;
+    })
+    })
+   }
 
   onGroup() {
     this.router.navigate(['expenses-group']);
@@ -39,7 +52,7 @@ export class ExpensesPage implements OnInit {
   }
 
   onDelete(entity: IExpenses) {
-    //service responsavel pelo crud executando o delete
+    this.service.revome(entity.id);
     this.notificationService.success('Renda deletada com sucesso!');
   }
 }

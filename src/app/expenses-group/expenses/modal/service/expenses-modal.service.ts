@@ -17,6 +17,7 @@ export class ExpensesModalService {
     return this.fb.group({
       id: [null],
       name:[''],
+      value:[0],
       expiry:[''],
       description: ['']
     });
@@ -26,6 +27,7 @@ export class ExpensesModalService {
     return this.fb.group({
       id: [entity.id],
       name:[entity.name],
+      value:[entity.value],
       expiry:[entity.expiry],
       description: [entity.description]
     });

@@ -17,7 +17,7 @@ export class IncomeModalService {
     return this.fb.group({
       id: [null],
       name:[''],
-      value:[''],
+      value:[0],
       description: ['']
     });
   }
