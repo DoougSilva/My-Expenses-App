@@ -22,12 +22,13 @@ export class IncomePage implements OnInit {
 
   incomeList: Iincome[] = [];
   entity: string = 'Rendas';
-  totalValue: string = 'R$ 2.000,00'
+  totalValue: string = '';
 
   constructor(private router: Router, private modalService: IncomeModalService, private notificationService: NotificationService, private service: IncomeService) { }
 
   ngOnInit() {
-    this.loadIncomes()
+    this.loadIncomes();
+    this.setTotalValue();
   }
 
   loadIncomes() {
@@ -35,6 +36,12 @@ export class IncomePage implements OnInit {
      this.incomeList = items;
     })
    }
+
+   setTotalValue() {
+    this.service.sumValue().then((value: number) => {
+      this.totalValue = `R$ ${value}`;
+    })
+  }
 
   onHome() {
     this.router.navigate(['home']);

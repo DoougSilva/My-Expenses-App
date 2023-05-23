@@ -86,4 +86,18 @@ export class ExpensesService {
       console.error(e);
     });
   }
+
+  public async sumValue(id: number): Promise<number> {
+    let value = 0;
+    try {
+      const db = await this.dbService.getDB();
+      let sql = 'SELECT SUM(_value) AS totalValue FROM expenses WHERE expense_group_id = ?';
+      let data: any[] = [id];
+      const queryResult = await db.executeSql(sql, data);
+      value = queryResult.rows.item(0).totalValue;
+    } catch (e: any) {
+      console.error(e);
+    }
+    return value === null ? 0 : value ;
+  }
 }

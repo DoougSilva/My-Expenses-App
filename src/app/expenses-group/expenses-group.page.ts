@@ -24,14 +24,15 @@ export class ExpensesGroupPage implements OnInit {
   expensesGroupList: IExpensesGroup[] = [];
   entity: string = 'Despesas';
   title: string = 'Grupo de despesas'
-  totalValue: string = 'R$ 2.000,00'
+  totalValue: string = ''
 
   constructor(
     private router: Router, private modalService: ExpensesGroupModalService, private notificationService: NotificationService, private service: ExpensesGroupService) { }
 
   
     ngOnInit() {
-      this.loadIncomes()
+      this.loadIncomes();
+      this.setTotalValue();
     }
   
     loadIncomes() {
@@ -39,6 +40,12 @@ export class ExpensesGroupPage implements OnInit {
        this.expensesGroupList = items;
       })
      }
+
+     setTotalValue() {
+      this.service.sumValue().then((value: number) => {
+        this.totalValue = `R$ ${value}`;
+      })
+    }
 
   onHome() {
     this.router.navigate(['home']);

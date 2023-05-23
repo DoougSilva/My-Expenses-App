@@ -22,12 +22,13 @@ export class ExpensesPage implements OnInit {
 
   expensesList: IExpenses[] = [];
   entity: string = 'Despesas';
-  totalValue: string = 'R$ 2.000,00'
+  totalValue: string = ''
 
   constructor(private router: Router, private route: ActivatedRoute , private modalService: ExpensesModalService, private notificationService: NotificationService, private service: ExpensesService) { }
 
   ngOnInit() {
-    this.loadIncomes()
+    this.loadIncomes();
+    this.setTotalValue();
   }
 
   loadIncomes() {
@@ -38,6 +39,15 @@ export class ExpensesPage implements OnInit {
     })
     })
    }
+
+   setTotalValue() {
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      this.service.sumValue(id).then((value: number) => {
+      this.totalValue = `R$ ${value}`;
+    })
+    })
+  }
 
   onGroup() {
     this.router.navigate(['expenses-group']);

@@ -82,4 +82,19 @@ export class IncomeService {
       console.error(e);
     });
   }
+
+  public async sumValue(): Promise<number> {
+    let value = 0;
+    try {
+      const db = await this.dbService.getDB();
+      let sql = 'SELECT SUM(_value) AS totalValue FROM income';
+      let data: any[] = [];
+      const queryResult = await db.executeSql(sql, data);
+      value = queryResult.rows.item(0).totalValue;
+    } catch (e: any) {
+      console.error(e);
+    }
+    return value === null ? 0 : value ;
+  }
+
 }
