@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { DatabaseService } from 'src/app/database/database.service';
 import { SQLiteObject, SQLite } from '@ionic-native/sqlite/ngx';
 import { IExpensesGroup } from '../model/expenses-group.interface';
+import { ExpensesService } from '../expenses/service/expenses.service';
 
 @Injectable({
   providedIn: 'root',
-  deps: [DatabaseService, SQLite]
+  deps: [DatabaseService, SQLite, ExpensesService]
 })
 export class ExpensesGroupService {
 
-  constructor(private dbService: DatabaseService) { }
+  constructor(private dbService: DatabaseService, private expensesService: ExpensesService) { }
 
   public insert(expensesGroup: IExpensesGroup):void {
     this.dbService.getDB()
@@ -32,7 +33,7 @@ export class ExpensesGroupService {
       let data = [id];
       db.executeSql(sql, data)
       .then(() => {
-        this.revomeExpenses(id);
+        this.expensesService.revomeByExpensesGroup(id);
         console.log('expenses group deleted')})
       .catch((e: any) => console.error(e));
     })
@@ -40,20 +41,6 @@ export class ExpensesGroupService {
       console.error(e);
     });
 
-  }
-
-  public revomeExpenses(id: number ):void {
-    this.dbService.getDB()
-    .then((db: SQLiteObject) => {
-      let sql = 'DELETE FROM expenses WHERE expense_group_id = ?';
-      let data = [id];
-      db.executeSql(sql, data)
-      .then(() => console.log('expenses deleted'))
-      .catch((e: any) => console.error(e));
-    })
-    .catch((e: any) => {
-      console.error(e);
-    });
   }
 
   public async getAll() {

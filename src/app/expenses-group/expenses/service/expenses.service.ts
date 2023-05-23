@@ -40,6 +40,20 @@ export class ExpensesService {
     });
   }
 
+  public revomeByExpensesGroup(id: number ):void {
+    this.dbService.getDB()
+    .then((db: SQLiteObject) => {
+      let sql = 'DELETE FROM expenses WHERE expense_group_id = ?';
+      let data = [id];
+      db.executeSql(sql, data)
+      .then(() => console.log('expenses deleted'))
+      .catch((e: any) => console.error(e));
+    })
+    .catch((e: any) => {
+      console.error(e);
+    });
+  }
+
   public async getAll(id: number) {
     let expenses = new Array<IExpenses>();
     this.dbService.getDB()
@@ -85,6 +99,20 @@ export class ExpensesService {
     .catch((e: any) => {
       console.error(e);
     });
+  }
+
+  public async sumAllValue(): Promise<number> {
+    let value = 0;
+    try {
+      const db = await this.dbService.getDB();
+      let sql = 'SELECT SUM(_value) AS totalValue FROM expenses';
+      let data: any[] = [];
+      const queryResult = await db.executeSql(sql, data);
+      value = queryResult.rows.item(0).totalValue;
+    } catch (e: any) {
+      console.error(e);
+    }
+    return value === null ? 0 : value ;
   }
 
   public async sumValue(id: number): Promise<number> {

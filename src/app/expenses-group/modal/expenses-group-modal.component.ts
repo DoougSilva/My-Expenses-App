@@ -8,6 +8,7 @@ import { ExpensesGroupService } from '../service/expenses-group.service';
 import { IExpensesGroup } from '../model/expenses-group.interface';
 import { DatabaseService } from 'src/app/database/database.service';
 import { SQLite } from '@ionic-native/sqlite/ngx'
+import { ExpensesService } from '../expenses/service/expenses.service';
 
 @Component({
   selector: 'app-expenses-modal',
@@ -15,7 +16,7 @@ import { SQLite } from '@ionic-native/sqlite/ngx'
   styleUrls: ['./expenses-group-modal.component.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, ReactiveFormsModule, FormsModule],
-  providers: [ExpensesGroupService, DatabaseService, SQLite]
+  providers: [ExpensesGroupService, DatabaseService, SQLite, ExpensesService]
 })
 export class ExpensesGroupModalComponent {
 

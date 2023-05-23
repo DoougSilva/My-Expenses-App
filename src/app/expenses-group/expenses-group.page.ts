@@ -10,6 +10,7 @@ import { IExpensesGroup } from './model/expenses-group.interface';
 import { ExpensesGroupService } from './service/expenses-group.service';
 import { DatabaseService } from '../database/database.service';
 import { SQLite } from '@ionic-native/sqlite/ngx'
+import { ExpensesService } from './expenses/service/expenses.service';
 
 @Component({
   selector: 'app-expenses-group',
@@ -17,7 +18,7 @@ import { SQLite } from '@ionic-native/sqlite/ngx'
   styleUrls: ['./expenses-group.page.scss'],
   standalone: true,
   imports: [IonicModule, ListComponent, DisplayComponent],
-  providers: [ExpensesGroupService, DatabaseService, SQLite]
+  providers: [ExpensesGroupService, DatabaseService, SQLite, ExpensesService]
 })
 export class ExpensesGroupPage implements OnInit {
 
