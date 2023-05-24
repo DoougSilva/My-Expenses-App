@@ -1,6 +1,6 @@
-import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { Iincome } from './model/income.interface';
 import { ListComponent } from '../shared/components/list-component/list.component';
 import { DisplayComponent } from '../shared/components/display-component/display.component';

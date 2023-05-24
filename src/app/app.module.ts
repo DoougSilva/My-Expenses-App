@@ -7,6 +7,7 @@ import { DatabaseService } from './database/database.service';
 import { IncomeService } from './income/service/income.service';
 import { ExpensesGroupService } from './expenses-group/service/expenses-group.service';
 import { ExpensesService } from './expenses-group/expenses/service/expenses.service';
+import { HomeService } from './home/service/home.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ExpensesService } from './expenses-group/expenses/service/expenses.serv
     DatabaseService,
     IncomeService,
     ExpensesGroupService,
-    ExpensesService
+    ExpensesService,
+    HomeService
   ],
   bootstrap: [AppComponent]
 })
