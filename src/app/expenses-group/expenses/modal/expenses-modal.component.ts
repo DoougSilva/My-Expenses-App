@@ -60,6 +60,9 @@ export class ExpensesModalComponent {
 
   async closeModal() {
     const close: string = "Modal Removed";
-    await this.modalController.dismiss(close);
+    await this.modalController.dismiss({
+      dismissed: true,
+      data: close
+    });
   }
 }

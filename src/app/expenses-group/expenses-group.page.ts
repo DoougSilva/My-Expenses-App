@@ -31,22 +31,26 @@ export class ExpensesGroupPage implements OnInit {
     private router: Router, private modalService: ExpensesGroupModalService, private notificationService: NotificationService, private service: ExpensesGroupService) { }
 
   
-    ngOnInit() {
-      this.loadIncomes();
-      this.setTotalValue();
-    }
+  ngOnInit() {
+    this.reload();
+  }
   
-    loadIncomes() {
-      this.service.getAll().then((items: IExpensesGroup[]) => {
-       this.expensesGroupList = items;
-      })
-     }
+  loadIncomes() {
+    this.service.getAll().then((items: IExpensesGroup[]) => {
+      this.expensesGroupList = items;
+    })
+  }
 
-     setTotalValue() {
-      this.service.sumValue().then((value: number) => {
-        this.totalValue = `R$ ${value}`;
-      })
-    }
+   setTotalValue() {
+    this.service.sumValue().then((value: number) => {
+      this.totalValue = `R$ ${value}`;
+    })
+  }
+
+  reload() {
+    this.loadIncomes();
+    this.setTotalValue();
+  }
 
   onHome() {
     this.router.navigate(['home']);
@@ -57,15 +61,20 @@ export class ExpensesGroupPage implements OnInit {
   }
 
   onEdit(entity: IExpensesGroup) {
-    this.modalService.editModal(entity);
+    this.modalService.editModal(entity).then(() => {
+      this.reload();
+    });
   }
 
   onDelete(entity: IExpensesGroup) {
     this.service.revome(entity.id);
+    this.reload();
     this.notificationService.success('Renda deletada com sucesso!');
   }
 
   onAdd() {
-    this.modalService.openIonModal();
+    this.modalService.openIonModal().then(() => {
+      this.reload();
+    });
   }
 }

@@ -27,8 +27,7 @@ export class ExpensesPage implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute , private modalService: ExpensesModalService, private notificationService: NotificationService, private service: ExpensesService) { }
 
   ngOnInit() {
-    this.loadIncomes();
-    this.setTotalValue();
+    this.reload();
   }
 
   loadIncomes() {
@@ -49,20 +48,30 @@ export class ExpensesPage implements OnInit {
     })
   }
 
+  reload() {
+    this.loadIncomes();
+    this.setTotalValue();
+  }
+
   onGroup() {
     this.router.navigate(['expenses-group']);
   }
 
   onAdd() {
-    this.modalService.openIonModal();
+    this.modalService.openIonModal().then(() => {
+      this.reload();
+    });
   }
 
   onEdit(entity: IExpenses) {
-    this.modalService.editModal(entity);
+    this.modalService.editModal(entity).then(() => {
+      this.reload();
+    });
   }
 
   onDelete(entity: IExpenses) {
     this.service.revome(entity.id);
+    this.reload();
     this.notificationService.success('Renda deletada com sucesso!');
   }
 }

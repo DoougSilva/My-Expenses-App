@@ -27,8 +27,7 @@ export class IncomePage implements OnInit {
   constructor(private router: Router, private modalService: IncomeModalService, private notificationService: NotificationService, private service: IncomeService) { }
 
   ngOnInit() {
-    this.loadIncomes();
-    this.setTotalValue();
+    this.reload();
   }
 
   loadIncomes() {
@@ -43,20 +42,30 @@ export class IncomePage implements OnInit {
     })
   }
 
+  reload() {
+    this.loadIncomes();
+    this.setTotalValue();
+  }
+
   onHome() {
     this.router.navigate(['home']);
   }
 
   onEdit(entity: Iincome) {
-    this.modalService.editModal(entity);
+    this.modalService.editModal(entity).then(() => {
+      this.reload();
+    });
   }
 
   onAdd() {
-    this.modalService.openIonModal();
+    this.modalService.openIonModal().then(() => {
+      this.reload();
+    });
   }
 
   onDelete(entity: Iincome) {
     this.service.revome(entity.id);
+    this.reload();
     this.notificationService.success('Renda deletada com sucesso!');
   }
 }

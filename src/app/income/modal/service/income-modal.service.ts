@@ -3,6 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { IncomeModalComponent } from '../income-modal.component';
 import { FormBuilder } from '@angular/forms';
 import { Iincome } from '../../model/income.interface';
+import { IncomePage } from '../../income.page';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class IncomeModalService {
 
   fb: FormBuilder = new FormBuilder();
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private router: Router) { }
 
   createForm() {
     return this.fb.group({
@@ -39,15 +41,21 @@ export class IncomeModalService {
         form: editForm
       }
     });
-    modal.onDidDismiss().then(() => {});
-    return await modal.present();
+
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+  
+    return data;
   }
 
-  async openIonModal() {
+  async openIonModal(): Promise<any> {
     const modal = await this.modalController.create({
       component: IncomeModalComponent
     });
-    modal.onDidDismiss().then(() => {});
-    return await modal.present();
+  
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+  
+    return data;
   }
 }

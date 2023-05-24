@@ -41,15 +41,19 @@ export class ExpensesModalService {
         form: editForm
       }
     });
-    modal.onDidDismiss().then(() => {});
-    return await modal.present();
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+  
+    return data;
   }
 
   async openIonModal() {
     const modal = await this.modalController.create({
       component: ExpensesModalComponent
     });
-    modal.onDidDismiss().then(() => {});
-    return await modal.present();
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+  
+    return data;
   }
 }
