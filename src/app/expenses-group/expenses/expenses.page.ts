@@ -72,7 +72,7 @@ export class ExpensesPage implements OnInit {
 
   onOpen(event: IExpenses) {
     this.entityToPay = event;
-    if (event.paid){
+    if (!event.paid){
           this.confirmPay(event);
     }
   }
