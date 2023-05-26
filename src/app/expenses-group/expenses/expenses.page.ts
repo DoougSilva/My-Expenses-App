@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListComponent } from '../../shared/components/list-component/list.component';
 import { DisplayComponent } from '../../shared/components/display-component/display.component';
@@ -23,8 +23,25 @@ export class ExpensesPage implements OnInit {
   expensesList: IExpenses[] = [];
   entity: string = 'Despesas';
   totalValue: string = ''
+  entityToPay: IExpenses | null = null;
 
-  constructor(private router: Router, private route: ActivatedRoute , private modalService: ExpensesModalService, private notificationService: NotificationService, private service: ExpensesService) { }
+  alertButtons = [
+    {
+      text: 'Pagar',
+      cssClass: 'alert-button-confirm',
+      handler: () => {
+        this.pay(this.entityToPay?.id);
+      }
+    },
+    {
+      text: 'Cancelar',
+      handler: () => {
+        this.entityToPay = null;
+      }
+    }
+  ];
+
+  constructor(private router: Router, private route: ActivatedRoute , private modalService: ExpensesModalService, private notificationService: NotificationService, private service: ExpensesService, public alertController: AlertController) { }
 
   ngOnInit() {
     this.reload();
@@ -51,6 +68,26 @@ export class ExpensesPage implements OnInit {
   reload() {
     this.loadIncomes();
     this.setTotalValue();
+  }
+
+  onOpen(event: IExpenses) {
+    this.entityToPay = event;
+    this.confirmPay(event);
+  }
+
+  async confirmPay(entity: IExpenses) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar pagamento de:',
+      message: `${entity?.name}`, 
+      buttons: this.alertButtons
+    });
+
+    await alert.present();
+  }
+
+  pay(id: any) {
+    this.service.pay(id)
+    this.reload();
   }
 
   onGroup() {

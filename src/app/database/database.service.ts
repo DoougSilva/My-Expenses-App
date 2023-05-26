@@ -32,7 +32,7 @@ export class DatabaseService {
     return db.sqlBatch([
       'CREATE TABLE IF NOT EXISTS income (id INTEGER PRIMARY KEY AUTOINCREMENT, _name TEXT, _description TEXT, _value REAL);',
       'CREATE TABLE IF NOT EXISTS expenses_group (id INTEGER PRIMARY KEY AUTOINCREMENT, _name TEXT, _description TEXT);',
-      'CREATE TABLE IF NOT EXISTS expenses (id INTEGER PRIMARY KEY AUTOINCREMENT, _name TEXT, _description TEXT, _value REAL, _expiry TIMESTAMP, _buy BOOLEAN, expense_group_id INTEGER, FOREIGN KEY (expense_group_id) REFERENCES expense_group (id));'
+      'CREATE TABLE IF NOT EXISTS expenses (id INTEGER PRIMARY KEY AUTOINCREMENT, _name TEXT, _description TEXT, _value REAL, _expiry TIMESTAMP, _paid BOOLEAN, expense_group_id INTEGER, FOREIGN KEY (expense_group_id) REFERENCES expense_group (id));'
     ])
       .then(() => {
         console.log('Tabelas criadas com sucesso');

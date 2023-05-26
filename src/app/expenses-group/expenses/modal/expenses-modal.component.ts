@@ -42,7 +42,7 @@ export class ExpensesModalComponent {
       description: this.form.value?.description,
       value: this.form.value?.value,
       expiry: this.form.value?.expiry,
-      buy: false,
+      paid: false,
       expensesGroupId: id
     } as IExpenses;
 

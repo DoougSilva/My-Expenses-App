@@ -15,8 +15,8 @@ export class ExpensesService {
   public insert(expenses: IExpenses):void {
     this.dbService.getDB()
     .then((db: SQLiteObject) => {
-      let sql = 'INSERT INTO expenses (_name, _description, _value, _expiry, _buy, expense_group_id) values (?, ?, ?, ?, ?, ?)';
-      let data = [expenses.name, expenses.description, expenses.value, expenses.expiry, expenses.buy, expenses.expensesGroupId];
+      let sql = 'INSERT INTO expenses (_name, _description, _value, _expiry, _paid, expense_group_id) values (?, ?, ?, ?, ?, ?)';
+      let data = [expenses.name, expenses.description, expenses.value, expenses.expiry, false, expenses.expensesGroupId];
       db.executeSql(sql, data)
       .then(() => console.log('expenses saved'))
       .catch((e: any) => console.error(e));
@@ -70,7 +70,7 @@ export class ExpensesService {
               value: data.rows.item(i)._value,
               description: data.rows.item(i)._description,
               expiry: data.rows.item(i)._expiry,
-              buy: data.rows.item(i)._buy,
+              paid: data.rows.item(i)._paid,
               expensesGroupId: data.rows.item(i).expense_group_id
             }
             expenses.push(expense);
@@ -90,8 +90,22 @@ export class ExpensesService {
   public update(expenses: IExpenses) {
     this.dbService.getDB()
     .then((db: SQLiteObject) => {
-      let sql = 'UPDATE expenses SET _name = ?, _description = ?, _value = ?, _expiry = ?, _buy = ? WHERE id = ?';
-      let data = [expenses.name, expenses.description, expenses.value, expenses.expiry, expenses.buy, expenses.id];
+      let sql = 'UPDATE expenses SET _name = ?, _description = ?, _value = ?, _expiry = ?, _paid = ? WHERE id = ?';
+      let data = [expenses.name, expenses.description, expenses.value, expenses.expiry, expenses.paid, expenses.id];
+      db.executeSql(sql, data)
+      .then(() => console.log('expenses group updated'))
+      .catch((e: any) => console.error(e));
+    })
+    .catch((e: any) => {
+      console.error(e);
+    });
+  }
+
+  public pay(id: number) {
+    this.dbService.getDB()
+    .then((db: SQLiteObject) => {
+      let sql = 'UPDATE expenses SET _paid = ? WHERE id = ?';
+      let data = [true, id];
       db.executeSql(sql, data)
       .then(() => console.log('expenses group updated'))
       .catch((e: any) => console.error(e));
