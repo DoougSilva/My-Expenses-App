@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ExpensesModalComponent } from '../expenses-modal.component';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { IExpenses } from '../../model/expenses.interface';
 
 @Injectable({
@@ -9,51 +9,92 @@ import { IExpenses } from '../../model/expenses.interface';
 })
 export class ExpensesModalService {
 
-  fb: FormBuilder = new FormBuilder();
+  constructor(private modalController: ModalController, private formBuilder: FormBuilder) { }
 
-  constructor(private modalController: ModalController) { }
-
-  createForm() {
-    return this.fb.group({
-      id: [null],
-      name:[''],
-      value:[0],
-      expiry:[''],
-      description: ['']
+  createForm(entity?: IExpenses): FormGroup {
+    const form = this.formBuilder.group({
+      id: [entity ? entity.id : null],
+      name: [entity ? entity.name : ''],
+      value: [entity ? entity.value : 0],
+      description: [entity ? entity.description : ''],
+      recurrent: [entity ? entity.recurrent : false],
+      expiry: [entity ? entity.expiry : ''],
+      indeterminate: [entity ? entity.indeterminate : false],
+      installments: [entity ? entity.installments : '']
     });
+
+  const recurrentControl = form.get('recurrent');
+  const expiryControl = form.get('expiry');
+  const indeterminateControl = form.get('indeterminate');
+  const installmentsControl = form.get('installments');
+
+  if (entity?.recurrent) {
+    indeterminateControl?.enable();
+    expiryControl?.enable();
+    if (entity.indeterminate) {
+      installmentsControl?.disable();
+    } else {
+      installmentsControl?.enable();
+    }
+  } else {
+    indeterminateControl?.disable();
+    expiryControl?.disable();
+    installmentsControl?.disable();
   }
+ 
+  recurrentControl?.valueChanges.subscribe((value) => {
+  if (value) {
+    indeterminateControl?.enable();
+    expiryControl?.enable();
+    if (!form.get('indeterminate')?.value) {
+      installmentsControl?.enable();
+    } else {
+      installmentsControl?.disable();
+    }
+  } else {
+    indeterminateControl?.disable();
+    expiryControl?.disable();
+    installmentsControl?.disable();
+  }
+});
 
-  createEditForm(entity: IExpenses) {
-    return this.fb.group({
-      id: [entity.id],
-      name:[entity.name],
-      value:[entity.value],
-      expiry:[entity.expiry],
-      description: [entity.description]
-    });
+  indeterminateControl?.valueChanges.subscribe((value) => {
+    if (value) {
+      installmentsControl?.disable();
+    } else {
+      installmentsControl?.enable();
+    }
+  });
+  return form;
   }
 
   async editModal(entity: IExpenses) {
-    const editForm = this.createEditForm(entity);
+    const form = this.createForm(entity);
+
     const modal = await this.modalController.create({
       component: ExpensesModalComponent,
-      componentProps:{
-        form: editForm
+      componentProps: {
+        form: form
       }
     });
     await modal.present();
     const { data } = await modal.onDidDismiss();
-  
+
     return data;
   }
 
   async openIonModal() {
+    const form = this.createForm();
+
     const modal = await this.modalController.create({
-      component: ExpensesModalComponent
+      component: ExpensesModalComponent,
+      componentProps: {
+        form: form
+      }
     });
     await modal.present();
     const { data } = await modal.onDidDismiss();
-  
+
     return data;
   }
 }

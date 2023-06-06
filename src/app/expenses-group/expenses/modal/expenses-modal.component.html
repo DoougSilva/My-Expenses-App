@@ -1,8 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button (click)="closeModal()">
-      <ion-icon name="close-outline" ></ion-icon>
-    </ion-button>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Despesas</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,20 +18,32 @@
 
     <ion-item>
       <ion-label position="floating">Valor</ion-label>
-      <ion-input formControlName="value" type="number" required>
-      </ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Vencimento</ion-label>
-      <ion-input formControlName="expiry" type="date" required>
-      </ion-input>
+      <ion-input formControlName="value" type="number" required></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Descrição</ion-label>
-      <ion-input formControlName="description" type="text" required>
-      </ion-input>
+      <ion-input formControlName="description" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Despesa recorrente</ion-label>
+      <ion-toggle formControlName="recurrent"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Vencimento</ion-label>
+      <ion-input formControlName="expiry" type="date" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fim indeterminado</ion-label>
+      <ion-toggle formControlName="indeterminate"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Parcelas</ion-label>
+      <ion-input formControlName="installments" type="number" required></ion-input>
     </ion-item>
 
     <ion-row>

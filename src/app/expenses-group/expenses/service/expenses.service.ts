@@ -15,8 +15,8 @@ export class ExpensesService {
   public insert(expenses: IExpenses):void {
     this.dbService.getDB()
     .then((db: SQLiteObject) => {
-      let sql = 'INSERT INTO expenses (_name, _description, _value, _expiry, _paid, expense_group_id) values (?, ?, ?, ?, ?, ?)';
-      let data = [expenses.name, expenses.description, expenses.value, expenses.expiry, false, expenses.expensesGroupId];
+      let sql = 'INSERT INTO expenses (_name, _description, _value, _expiry, _paid, _recurrent , _indeterminate, _installments, expense_group_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+      let data = [expenses.name, expenses.description, expenses.value, expenses.expiry, false, expenses.recurrent, expenses.indeterminate, expenses.installments, expenses.expensesGroupId];
       db.executeSql(sql, data)
       .then(() => console.log('expenses saved'))
       .catch((e: any) => console.error(e));
@@ -71,7 +71,10 @@ export class ExpensesService {
               description: data.rows.item(i)._description,
               expiry: data.rows.item(i)._expiry,
               paid: data.rows.item(i)._paid,
-              expensesGroupId: data.rows.item(i).expense_group_id
+              expensesGroupId: data.rows.item(i).expense_group_id,
+              recurrent: data.rows.item(i)._recurrent,
+              indeterminate: data.rows.item(i)._indeterminate,
+              installments: data.rows.item(i)._installments
             }
             expenses.push(expense);
           }
@@ -90,8 +93,8 @@ export class ExpensesService {
   public update(expenses: IExpenses) {
     this.dbService.getDB()
     .then((db: SQLiteObject) => {
-      let sql = 'UPDATE expenses SET _name = ?, _description = ?, _value = ?, _expiry = ?, _paid = ? WHERE id = ?';
-      let data = [expenses.name, expenses.description, expenses.value, expenses.expiry, expenses.paid, expenses.id];
+      let sql = 'UPDATE expenses SET _name = ?, _description = ?, _value = ?, _expiry = ?, _paid = ?, _recurrent = ?, _indeterminate = ?, _installments = ? WHERE id = ?';
+      let data = [expenses.name, expenses.description, expenses.value, expenses.expiry, expenses.paid, expenses.recurrent, expenses.indeterminate, expenses.installments, expenses.id];
       db.executeSql(sql, data)
       .then(() => console.log('expenses group updated'))
       .catch((e: any) => console.error(e));

@@ -43,6 +43,9 @@ export class ExpensesModalComponent {
       value: this.form.value?.value,
       expiry: this.form.value?.expiry,
       paid: false,
+      indeterminate: this.form.value?.indeterminate,
+      installments: this.form.value?.installments,
+      recurrent: this.form.value?.recurrent,
       expensesGroupId: id
     } as IExpenses;
 
