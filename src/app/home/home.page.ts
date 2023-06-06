@@ -24,7 +24,7 @@ export class HomePage implements ViewDidEnter {
 
   ionViewDidEnter() {
     this.service.getTotalValue().then((value: number) => {
-      this.totalValue = `R$ ${value}`;
+      this.totalValue = `R$ ${value.toFixed(2)}`;
     })
   }
 

@@ -38,7 +38,7 @@ export class IncomePage implements OnInit {
 
    setTotalValue() {
     this.service.sumValue().then((value: number) => {
-      this.totalValue = `R$ ${value}`;
+      this.totalValue = `R$ ${value.toFixed(2)}`;
     })
   }
 

@@ -60,7 +60,7 @@ export class ExpensesPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
       this.service.sumValue(id).then((value: number) => {
-      this.totalValue = `R$ ${value}`;
+      this.totalValue = `R$ ${value.toFixed(2)}`;
     })
     })
   }

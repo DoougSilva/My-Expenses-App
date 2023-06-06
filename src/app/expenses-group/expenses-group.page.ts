@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ListComponent } from '../shared/components/list-component/list.component';
@@ -43,7 +43,7 @@ export class ExpensesGroupPage implements OnInit {
 
    setTotalValue() {
     this.service.sumValue().then((value: number) => {
-      this.totalValue = `R$ ${value}`;
+      this.totalValue = `R$ ${value.toFixed(2)}`;
     })
   }
 
@@ -57,7 +57,7 @@ export class ExpensesGroupPage implements OnInit {
   }
 
   onOpen(event: IExpenses) {
-    this.router.navigate(['expenses'], { queryParams: {id: event.id} });
+    this.router.navigate(['expenses'], { queryParams: {id: event.id}, replaceUrl: true });
   }
 
   onEdit(entity: IExpensesGroup) {
