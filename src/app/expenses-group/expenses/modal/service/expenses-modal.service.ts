@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ExpensesModalComponent } from '../expenses-modal.component';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IExpenses } from '../../model/expenses.interface';
 
 @Injectable({
@@ -14,13 +14,13 @@ export class ExpensesModalService {
   createForm(entity?: any): FormGroup {
     const form = this.formBuilder.group({
       id: [entity ? entity.id : null],
-      name: [entity ? entity.name : ''],
-      value: [entity ? entity.value : 0],
+      name: [entity ? entity.name : '', Validators.required],
+      value: [entity ? entity.value : null, Validators.required],
       description: [entity ? entity.description : ''],
       recurrent: [entity ? entity.recurrent : false],
-      expiry: [entity ? entity.expiry : ''],
+      expiry: [entity ? entity.expiry : '', Validators.required],
       indeterminate: [entity ? entity.indeterminate : false],
-      installments: [entity ? entity.installments : '']
+      installments: [entity ? entity.installments : null, Validators.required]
     });
 
   const recurrentControl = form.get('recurrent');

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ExpensesGroupModalComponent } from '../expenses-group-modal.component';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { IExpensesGroup } from '../../model/expenses-group.interface';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class ExpensesGroupModalService {
   createForm() {
     return this.fb.group({
       id: [null],
-      name:[''],
+      name:['', Validators.required],
       description: ['']
     });
   }
@@ -24,7 +24,7 @@ export class ExpensesGroupModalService {
   createEditForm(entity: IExpensesGroup) {
     return this.fb.group({
       id: [entity.id],
-      name:[entity.name],
+      name:[entity.name, Validators.required],
       description: [entity.description]
     });
   }

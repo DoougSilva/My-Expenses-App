@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { IncomeModalComponent } from '../income-modal.component';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Iincome } from '../../model/income.interface';
 import { IncomePage } from '../../income.page';
 import { Router } from '@angular/router';
@@ -18,8 +18,8 @@ export class IncomeModalService {
   createForm() {
     return this.fb.group({
       id: [null],
-      name:[''],
-      value:[0],
+      name:['', Validators.required],
+      value:[null, Validators.required],
       description: ['']
     });
   }
@@ -27,8 +27,8 @@ export class IncomeModalService {
   createEditForm(entity: Iincome) {
     return this.fb.group({
       id: [entity.id],
-      name:[entity.name],
-      value:[entity.value],
+      name:[entity.name, Validators.required],
+      value:[entity.value, Validators.required],
       description: [entity.description]
     });
   }

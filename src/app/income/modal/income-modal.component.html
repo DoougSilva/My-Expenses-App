@@ -10,25 +10,25 @@
 <ion-content>
   <form [formGroup]="form" (ngSubmit)="save()">
     <ion-item>
-      <ion-label position="floating">Nome</ion-label>
+      <ion-label position="floating">Nome *</ion-label>
       <ion-input formControlName="name" type="text" required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Valor</ion-label>
+      <ion-label position="floating">Valor *</ion-label>
       <ion-input formControlName="value" type="number" required>
       </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Descrição</ion-label>
-      <ion-input formControlName="description" type="text" required>
+      <ion-input formControlName="description" type="text">
       </ion-input>
     </ion-item>
 
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="primary" shape="full" expand="block">
+        <ion-button type="submit" [disabled]="form.invalid" color="primary" shape="full" expand="block">
           Adicionar
         </ion-button>
       </ion-col>
