@@ -10,3 +10,12 @@
     (delete)="onDelete($event)"
     (open)="onOpen($event)"
 ></app-list>
+
+<app-list
+    [permitAdd]="false"
+    [list]="expensesListPaid"
+    [title]="expensesPaid"
+    (add)="onAdd()"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+></app-list>

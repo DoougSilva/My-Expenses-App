@@ -13,6 +13,7 @@ import { Iincome } from 'src/app/income/model/income.interface';
 export class ListComponent  implements OnInit {
   @Input() list: any[] = [];
   @Input() title: string = '';
+  @Input() permitAdd: boolean = true;
   @Output() add = new EventEmitter(false);
   @Output() open = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);

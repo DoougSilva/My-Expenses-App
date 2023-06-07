@@ -21,8 +21,10 @@ import { SQLite } from '@ionic-native/sqlite/ngx'
 export class ExpensesPage implements OnInit {
 
   expensesList: IExpenses[] = [];
+  expensesListPaid: IExpenses[] = [];
   entity: string = 'Despesas';
-  totalValue: string = ''
+  expensesPaid: string = 'Despesas pagas';
+  totalValue: string = '';
   entityToPay: IExpenses | null = null;
 
   alertButtons = [
@@ -54,6 +56,13 @@ export class ExpensesPage implements OnInit {
       this.expensesList = items;
     })
     })
+
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      this.service.getAllpaid(id).then((items: IExpenses[]) => {
+      this.expensesListPaid = items;
+    })
+    })
    }
 
    setTotalValue() {
@@ -72,9 +81,7 @@ export class ExpensesPage implements OnInit {
 
   onOpen(event: IExpenses) {
     this.entityToPay = event;
-    if (!event.paid){
           this.confirmPay(event);
-    }
   }
 
   async confirmPay(entity: IExpenses) {
