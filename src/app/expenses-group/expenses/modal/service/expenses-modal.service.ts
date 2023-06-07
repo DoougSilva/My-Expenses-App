@@ -11,7 +11,7 @@ export class ExpensesModalService {
 
   constructor(private modalController: ModalController, private formBuilder: FormBuilder) { }
 
-  createForm(entity?: IExpenses): FormGroup {
+  createForm(entity?: any): FormGroup {
     const form = this.formBuilder.group({
       id: [entity ? entity.id : null],
       name: [entity ? entity.name : ''],
@@ -28,10 +28,10 @@ export class ExpensesModalService {
   const indeterminateControl = form.get('indeterminate');
   const installmentsControl = form.get('installments');
 
-  if (entity?.recurrent) {
+  if (entity?.recurrent === 'true') {
     indeterminateControl?.enable();
     expiryControl?.enable();
-    if (entity.indeterminate) {
+    if (entity.indeterminate === 'true') {
       installmentsControl?.disable();
     } else {
       installmentsControl?.enable();
