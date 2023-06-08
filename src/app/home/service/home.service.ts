@@ -19,4 +19,16 @@ export class HomeService {
     expensesValue += await this.expensesService.sumAllValue().then((expenses) => { return expenses; });
     return incomeValue - expensesValue;
   }
+
+  public async getIncome() {
+    let incomeValue = 0;
+    incomeValue += await this.incomeService.sumValue().then((income) => { return income; });
+    return incomeValue;
+  }
+
+  public async getExpenses() {
+    let expensesValue = 0;
+    expensesValue += await this.expensesService.sumAllValue().then((expenses) => { return expenses; });
+    return expensesValue;
+  }
 }
