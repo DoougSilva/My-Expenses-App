@@ -31,4 +31,9 @@ export class HomeService {
     expensesValue += await this.expensesService.sumAllValue().then((expenses) => { return expenses; });
     return expensesValue;
   }
+
+
+ public async reset() {
+  await this.expensesService.reset();
+  }
 }

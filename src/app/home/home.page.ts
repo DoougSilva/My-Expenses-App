@@ -27,6 +27,10 @@ export class HomePage implements ViewDidEnter, OnDestroy {
   @ViewChild("graphic", { static: true}) element!: ElementRef;
 
   ionViewDidEnter() {
+    this.validateDay().then((value: string) => {
+      console.log(value);
+    });
+
     this.service.getTotalValue().then((value: number) => {
       this.totalValue = `R$ ${value.toFixed(2)}`;
     });
@@ -66,6 +70,17 @@ export class HomePage implements ViewDidEnter, OnDestroy {
       });
       });
     });
+  }
+
+  async validateDay() {
+    const date = new Date();
+    const day = date.getDate();
+    
+    if (day === 9) {
+      await this.service.reset();
+      return 'expenses reseted';
+    }
+    return 'not is day to reset';
   }
 
   ngOnDestroy() {
