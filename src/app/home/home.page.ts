@@ -76,7 +76,7 @@ export class HomePage implements ViewDidEnter, OnDestroy {
     const date = new Date();
     const day = date.getDate();
     
-    if (day === 9) {
+    if (day === 1) {
       await this.service.reset();
       return 'expenses reseted';
     }
