@@ -5,7 +5,8 @@ export interface IExpenses extends Entity{
     value: number;
     paid: boolean;
     expensesGroupId: number;
-    recurrent: boolean,
-    indeterminate: boolean,
-    installments: number
+    recurrent: boolean;
+    indeterminate: boolean;
+    installments: number;
+    control: Date;
   }
