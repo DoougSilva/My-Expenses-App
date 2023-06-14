@@ -21,7 +21,7 @@
 
          <ion-label>
           <h2>{{entity?.name}}</h2>
-          <p>R$ {{entity?.value.toFixed(2)}}</p>
+          <p>{{entity?.value ? 'R$ ' + entity?.value.toFixed(2) : null}}</p>
         </ion-label>
 
          </div>
