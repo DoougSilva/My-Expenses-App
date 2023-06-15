@@ -1,21 +1,23 @@
-<ion-icon name="arrow-back" (click)="onGroup()" size="large"></ion-icon>
+<ion-content>
+    <ion-icon name="arrow-back" (click)="onGroup()" size="large"></ion-icon>
 
-<app-display [entity]="entity" [value]="totalValue"></app-display>
-
-<app-list
-    [list]="expensesList"
-    [title]="entity"
-    (add)="onAdd()"
-    (edit)="onEdit($event)"
-    (delete)="onDelete($event)"
-    (open)="onOpen($event)"
-></app-list>
-
-<app-list
-    [permitAdd]="false"
-    [list]="expensesListPaid"
-    [title]="expensesPaid"
-    (add)="onAdd()"
-    (edit)="onEdit($event)"
-    (delete)="onDelete($event)"
-></app-list>
+    <app-display [entity]="entity" [value]="totalValue"></app-display>
+    
+    <app-list
+        [list]="expensesList"
+        [title]="entity"
+        (add)="onAdd()"
+        (edit)="onEdit($event)"
+        (delete)="onDelete($event)"
+        (open)="onOpen($event)"
+    ></app-list>
+    
+    <app-list
+        [permitAdd]="false"
+        [list]="expensesListPaid"
+        [title]="expensesPaid"
+        (add)="onAdd()"
+        (edit)="onEdit($event)"
+        (delete)="onDelete($event)"
+    ></app-list>
+</ion-content>

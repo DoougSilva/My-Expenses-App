@@ -1,12 +1,14 @@
-<ion-icon name="arrow-back" (click)="onHome()" size="large"></ion-icon>
+<ion-content>
+    <ion-icon name="arrow-back" (click)="onHome()" size="large"></ion-icon>
 
-<app-display [entity]="entity" [value]="totalValue"></app-display>
-
-<app-list
-    [list]="expensesGroupList"
-    [title]="title"
-    (open)="onOpen($event)"
-    (edit)="onEdit($event)"
-    (add)="onAdd()"
-    (delete)="onDelete($event)"
-></app-list>
+    <app-display [entity]="entity" [value]="totalValue"></app-display>
+    
+    <app-list
+        [list]="expensesGroupList"
+        [title]="title"
+        (open)="onOpen($event)"
+        (edit)="onEdit($event)"
+        (add)="onAdd()"
+        (delete)="onDelete($event)"
+    ></app-list>
+</ion-content>
