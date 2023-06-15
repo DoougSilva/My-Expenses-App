@@ -14,15 +14,15 @@
     <ion-list>
       <div class="list-items" style="display: flex;" *ngFor="let entity of list">
       <div>
-         <div (click)="onOpen(entity)" style="width: 135px;
-         height: 60px;
+         <div (click)="onOpen(entity)" style="width: 200px;
+         height: 80px;
          background-color: blue;
-         border-radius: 10px; font-size: large; justify-content: center; display: flex; margin-top: 5px; padding: 15px;">
+         border-radius: 10px; font-size: large; justify-content: center; display: flex; margin-top: 5px; margin-right: 70px; padding: 15px;">
 
-         <ion-label>
-          <h2>{{entity?.name}}</h2>
-          <p>{{entity?.value ? 'R$ ' + entity?.value.toFixed(2) : null}}</p>
-        </ion-label>
+          <ion-label style="text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            <h2 style="margin-bottom: 5px;">{{entity?.name}}</h2>
+            <p style="margin-top: 5px;">{{entity?.value ? 'R$ ' + entity?.value.toFixed(2) : null}}</p>
+          </ion-label>
 
          </div>
       </div> 
