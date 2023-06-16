@@ -20,7 +20,8 @@ export class ExpensesModalService {
       recurrent: [entity ? entity.recurrent : false],
       expiry: [entity ? entity.expiry : '', Validators.required],
       indeterminate: [entity ? entity.indeterminate : false],
-      installments: [entity ? entity.installments : null, Validators.required]
+      installments: [entity ? entity.installments : null, Validators.required],
+      paid: [entity ? entity.paid : false]
     });
 
   const recurrentControl = form.get('recurrent');

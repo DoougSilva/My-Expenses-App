@@ -57,7 +57,7 @@ export class HomePage implements ViewDidEnter, OnDestroy {
               'rgb(255, 99, 132)'
             ],
             hoverOffset: 4
-          }]
+          }],
         };
 
         if (this.chart) {
@@ -67,6 +67,19 @@ export class HomePage implements ViewDidEnter, OnDestroy {
         this.chart = new Chart(this.element.nativeElement, {
           type: 'doughnut',
           data: data,
+          options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: 'rgb(255,255,255)',
+                        font: {
+                          size: 20
+                        }
+                    }
+                }
+            }
+          }
       });
       });
     });

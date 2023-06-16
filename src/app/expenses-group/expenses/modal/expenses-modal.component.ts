@@ -42,7 +42,7 @@ export class ExpensesModalComponent {
       description: this.form.value?.description,
       value: this.form.value?.value,
       expiry: this.form.value?.expiry,
-      paid: false,
+      paid: this.form.value?.paid,
       indeterminate: this.form.value?.indeterminate,
       installments: this.form.value?.installments,
       recurrent: this.form.value?.recurrent,
